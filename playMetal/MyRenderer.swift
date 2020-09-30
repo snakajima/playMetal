@@ -35,6 +35,21 @@ extension MyRenderer: MTKViewDelegate {
             return
         }
         
+        guard let shaderLib = device.makeDefaultLibrary() else {
+            print("no shderLib")
+            return
+        }
+        
+        guard let vertexShader = shaderLib.makeFunction(name: "vertexShader") else {
+            print("no vertexShader")
+            return
+        }
+        
+        guard let fragmentShader = shaderLib.makeFunction(name: "fragmentShader") else {
+            print("no fragmentShader")
+            return
+        }
+        
         commandBuffer.present(drawable)
         commandBuffer.commit()
     }
