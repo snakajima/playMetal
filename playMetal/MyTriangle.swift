@@ -11,11 +11,7 @@ import SwiftUI // preview
 class MyTriangle: MyRendererDelegate {
     var metalRenderPipelineState: MTLRenderPipelineState? = nil
     var vertexBuffer:MTLBuffer? = nil
-    var vertexCount = 0
-    
-    func prepare(device:MTLDevice, pixelFormat:MTLPixelFormat) {
-        self.metalRenderPipelineState = MyRenderer.createPipelineState(device: device, pixelFormat: pixelFormat, vertex:"vertexShader", fragment:"fragmentShader")
-
+    var vertices:[simd_float2] {
         var vertices:[simd_float2] = [
             [0,0],
             [1,0],
@@ -25,8 +21,13 @@ class MyTriangle: MyRendererDelegate {
             [1,0]
         ]
         vertices.append(vertices[0])
+        return vertices
+    }
+    var vertexCount:Int { vertices.count }
+    
+    func prepare(device:MTLDevice, pixelFormat:MTLPixelFormat) {
+        self.metalRenderPipelineState = MyRenderer.createPipelineState(device: device, pixelFormat: pixelFormat, vertex:"vertexShader", fragment:"fragmentShader")
 
-        self.vertexCount = vertices.count
         self.vertexBuffer = device.makeBuffer(bytes: vertices, length: vertices.count * MemoryLayout<simd_float2>.stride, options: [])!
     }
 }
