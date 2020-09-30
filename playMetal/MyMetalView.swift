@@ -35,10 +35,10 @@ struct MyMetalView: NSViewRepresentable {
             metalView.device = device
             metalView.delegate = renderer
             metalView.translatesAutoresizingMaskIntoConstraints = false
-            metalView.clearColor = MTLClearColorMake(1, 1, 1, 1)
+            metalView.clearColor = MTLClearColorMake(0, 0, 1, 1)
             metalView.colorPixelFormat = renderer.pixelFormat
             metalView.autoResizeDrawable = true
-            metalView.framebufferOnly = false
+            //metalView.framebufferOnly = false
             
             return metalView
         }

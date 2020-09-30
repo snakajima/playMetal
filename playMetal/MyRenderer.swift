@@ -69,8 +69,6 @@ extension MyRenderer: MTKViewDelegate {
             return
         }
         
-        renderDescriptor.colorAttachments[0].clearColor = MTLClearColorMake(0, 0, 1, 1)
-        
         if let renderEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: renderDescriptor) {
             renderEncoder.setRenderPipelineState(metalRenderPipelineState)
             renderEncoder.setVertexBuffer(vertexBuffer, offset: 0, index: 0)
