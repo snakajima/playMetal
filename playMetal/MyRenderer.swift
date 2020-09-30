@@ -25,18 +25,17 @@ class MyRenderer: NSObject {
     }
     
     static private func createVertexBuffer(device:MTLDevice) ->MTLBuffer {
-        var circleVertices = [simd_float2]()
-
-        let origin = simd_float2(0, 0)
-        for i in 0...720 {
-            let rad = Float(i) / 2.0 / 180 * .pi
-            let position : simd_float2 = [cos(rad), sin(rad)]
-            circleVertices.append(position)
-            if (i+1)%2 == 0 {
-                circleVertices.append(origin)
-            }
-        }
-        return device.makeBuffer(bytes: circleVertices, length: circleVertices.count * MemoryLayout<simd_float2>.stride, options: [])!
+        let vertices = Array(0...360).map { (i) -> [simd_float2] in
+            let rad0 = Float(i * 2) / 2.0 / 180 * .pi
+            let rad1 = Float(i * 2 + 1) / 2.0 / 180 * .pi
+            return [
+                [cos(rad0), sin(rad0)],
+                [cos(rad1), sin(rad1)],
+                [0, 0]
+            ]
+        }.flatMap { $0 }
+        
+        return device.makeBuffer(bytes: vertices, length: vertices.count * MemoryLayout<simd_float2>.stride, options: [])!
     }
     
     static private func createPipelineState(device:MTLDevice, pixelFormat:MTLPixelFormat) -> MTLRenderPipelineState? {
