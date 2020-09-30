@@ -16,6 +16,7 @@
 		746E65DE252408FF0041AEE0 /* MyRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746E65DD252408FF0041AEE0 /* MyRenderer.swift */; };
 		746E65E1252438EB0041AEE0 /* MyShader.metal in Sources */ = {isa = PBXBuildFile; fileRef = 746E65E0252438EB0041AEE0 /* MyShader.metal */; };
 		746E65EB2525371A0041AEE0 /* MyCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746E65EA2525371A0041AEE0 /* MyCircle.swift */; };
+		746E65EE25254B8E0041AEE0 /* MyTriangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746E65ED25254B8E0041AEE0 /* MyTriangle.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 		746E65DD252408FF0041AEE0 /* MyRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRenderer.swift; sourceTree = "<group>"; };
 		746E65E0252438EB0041AEE0 /* MyShader.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = MyShader.metal; sourceTree = "<group>"; };
 		746E65EA2525371A0041AEE0 /* MyCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCircle.swift; sourceTree = "<group>"; };
+		746E65ED25254B8E0041AEE0 /* MyTriangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTriangle.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +70,7 @@
 				746E65DA252406410041AEE0 /* MyMetalView.swift */,
 				746E65DD252408FF0041AEE0 /* MyRenderer.swift */,
 				746E65EA2525371A0041AEE0 /* MyCircle.swift */,
+				746E65ED25254B8E0041AEE0 /* MyTriangle.swift */,
 				746E65E0252438EB0041AEE0 /* MyShader.metal */,
 				746E65CA252405C90041AEE0 /* Assets.xcassets */,
 				746E65CF252405C90041AEE0 /* Main.storyboard */,
@@ -159,6 +162,7 @@
 				746E65DE252408FF0041AEE0 /* MyRenderer.swift in Sources */,
 				746E65EB2525371A0041AEE0 /* MyCircle.swift in Sources */,
 				746E65E1252438EB0041AEE0 /* MyShader.metal in Sources */,
+				746E65EE25254B8E0041AEE0 /* MyTriangle.swift in Sources */,
 				746E65C9252405C70041AEE0 /* ContentView.swift in Sources */,
 				746E65C7252405C70041AEE0 /* AppDelegate.swift in Sources */,
 				746E65DB252406410041AEE0 /* MyMetalView.swift in Sources */,
