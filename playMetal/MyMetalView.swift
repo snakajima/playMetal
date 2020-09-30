@@ -4,7 +4,6 @@
 //
 //  Created by SATOSHI NAKAJIMA on 9/29/20.
 //
-
 import SwiftUI
 import MetalKit
 

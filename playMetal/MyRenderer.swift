@@ -4,10 +4,9 @@
 //
 //  Created by SATOSHI NAKAJIMA on 9/29/20.
 //
-
 import MetalKit
 import simd
-import SwiftUI // only for preview
+import SwiftUI // preview
 
 protocol MyRendererDelegate {
     var metalRenderPipelineState:MTLRenderPipelineState? { get }
