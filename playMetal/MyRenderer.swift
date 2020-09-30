@@ -70,14 +70,12 @@ extension MyRenderer: MTKViewDelegate {
         guard let commandQueue = self.commandQueue,
               let commandBuffer = commandQueue.makeCommandBuffer(),
               let drawable = view.currentDrawable,
-              let metalRenderPipelineState = self.metalRenderPipelineState else {
+              let metalRenderPipelineState = self.metalRenderPipelineState,
+              let renderDescriptor = view.currentRenderPassDescriptor else {
             print("no commandQueu, commandBuffer, drawable, metalRenderPipelineState")
             return
         }
-        guard let renderDescriptor = view.currentRenderPassDescriptor else {
-            print("no renderDescriptor")
-            return
-        }
+        
         renderDescriptor.colorAttachments[0].clearColor = MTLClearColorMake(0, 0, 1, 1)
         guard let renderEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: renderDescriptor) else {
             print("no renderEncoder")
@@ -86,7 +84,7 @@ extension MyRenderer: MTKViewDelegate {
 
         renderEncoder.setRenderPipelineState(metalRenderPipelineState)
         renderEncoder.setVertexBuffer(vertexBuffer, offset: 0, index: 0)
-        renderEncoder.drawPrimitives(type: .triangle, vertexStart: 0, vertexCount: 1081)
+        renderEncoder.drawPrimitives(type: .triangleStrip, vertexStart: 0, vertexCount: 1081)
 
         renderEncoder.endEncoding()
         commandBuffer.present(drawable)
