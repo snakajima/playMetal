@@ -24,6 +24,7 @@ struct MyMetalView: NSViewRepresentable {
     
     class Coordinator: NSObject {
         let gpu = MTLCreateSystemDefaultDevice()
+        let renderer = MyRenderer()
         let view: MyMetalView
         init(_ view:MyMetalView) {
             self.view = view
