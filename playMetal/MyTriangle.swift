@@ -9,8 +9,11 @@ import simd
 import SwiftUI // preview
 
 class MyTriangle: MyRendererDelegate {
+    var device:MTLDevice!
     var metalRenderPipelineState: MTLRenderPipelineState? = nil
-    var vertexBuffer:MTLBuffer? = nil
+    var vertexBuffer:MTLBuffer? {
+        device.makeBuffer(bytes: vertices, length: vertices.count * MemoryLayout<simd_float2>.stride, options: [])!
+    }
     var vertices:[simd_float2] {
         var vertices:[simd_float2] = [
             [0,0],
@@ -27,8 +30,7 @@ class MyTriangle: MyRendererDelegate {
     
     func prepare(device:MTLDevice, pixelFormat:MTLPixelFormat) {
         self.metalRenderPipelineState = MyRenderer.createPipelineState(device: device, pixelFormat: pixelFormat, vertex:"vertexShader", fragment:"fragmentShader")
-
-        self.vertexBuffer = device.makeBuffer(bytes: vertices, length: vertices.count * MemoryLayout<simd_float2>.stride, options: [])!
+        self.device = device
     }
 }
 
