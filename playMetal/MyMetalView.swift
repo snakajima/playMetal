@@ -45,7 +45,7 @@ struct MyMetalView: NSViewRepresentable {
             metalView.colorPixelFormat = renderer.pixelFormat
             metalView.autoResizeDrawable = true
             metalView.framebufferOnly = false
-
+            
             return metalView
         }
     }
