@@ -19,7 +19,6 @@ class MyRenderer: NSObject {
     let pixelFormat:MTLPixelFormat
     let commandQueue:MTLCommandQueue?
     let vertexBuffer:MTLBuffer
-    let metalRenderPipelineState:MTLRenderPipelineState?
     let delegate:MyRendererDelegate
     
     init(device:MTLDevice, pixelFormat:MTLPixelFormat, delegate:MyRendererDelegate) {
@@ -29,7 +28,6 @@ class MyRenderer: NSObject {
         delegate.prepare(device: device, pixelFormat: pixelFormat)
         self.commandQueue = device.makeCommandQueue()
         self.vertexBuffer = MyRenderer.createVertexBuffer(device:device)
-        self.metalRenderPipelineState = MyRenderer.createPipelineState(device: device, pixelFormat: pixelFormat, vertex:"vertexShader", fragment:"fragmentShader")
     }
     
     static private func createVertexBuffer(device:MTLDevice) ->MTLBuffer {
