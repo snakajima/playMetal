@@ -30,9 +30,13 @@ class MyRenderer: NSObject {
             return (Float.pi*d)/180
         }
 
+        let origin = simd_float2(0, 0)
         for i in 0...720 {
             let position : simd_float2 = [cos(rads(forDegree: Float(Float(i)/2.0))),sin(rads(forDegree: Float(Float(i)/2.0)))]
             circleVertices.append(position)
+            if (i+1)%2 == 0 {
+                circleVertices.append(origin)
+            }
         }
         return device.makeBuffer(bytes: circleVertices, length: circleVertices.count * MemoryLayout<simd_float2>.stride, options: [])!
     }
