@@ -22,18 +22,25 @@ struct MyMetalView: NSViewRepresentable {
         //
     }
     
-    class Coordinator: NSObject {
-        let gpu = MTLCreateSystemDefaultDevice()
-        let renderer = MyRenderer()
+    class Coordinator: NSObject, CALayerDelegate {
+        let device = MTLCreateSystemDefaultDevice()! // LAZY
+        let renderer:MyRenderer
         let view: MyMetalView
         init(_ view:MyMetalView) {
             self.view = view
+            self.renderer = MyRenderer(device: device, pixelFormat: .bgra8Unorm)
         }
         
         func makeLayer() -> CALayer {
             let layer = CAMetalLayer()
+            layer.pixelFormat = renderer.pixelFormat
+            layer.delegate = self
             layer.backgroundColor = NSColor.yellow.cgColor
             return layer
+        }
+        
+        func display(_ layer: CALayer) {
+            print("display")
         }
     }
 }
