@@ -15,13 +15,14 @@ class MyTriangle: MyRendererDelegate {
         device.makeBuffer(bytes: vertices, length: vertices.count * MemoryLayout<simd_float2>.stride, options: [])!
     }
     var vertices:[simd_float2] {
+        let time = Float(CACurrentMediaTime() * .pi)
         var vertices:[simd_float2] = [
-            [0,0],
-            [1,0],
-            [0,1],
-            [-1,0],
-            [0,-1],
-            [1,0]
+            simd_float2(0,0),
+            simd_float2(sinf(time),0),
+            simd_float2(0,cosf(time)),
+            simd_float2(-sinf(time),0),
+            simd_float2(0,-cosf(time)),
+            simd_float2(sinf(time),0)
         ]
         vertices.append(vertices[0])
         return vertices
