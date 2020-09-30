@@ -14,9 +14,7 @@ struct MyMetalView: NSViewRepresentable {
     
     public func makeNSView(context: Context) -> some NSView {
         let nsView = NSView()
-        let layer = CALayer()
-        layer.backgroundColor = NSColor.yellow.cgColor
-        nsView.layer = layer
+        nsView.layer = context.coordinator.makeLayer()
         return nsView
     }
     
@@ -29,6 +27,12 @@ struct MyMetalView: NSViewRepresentable {
         let view: MyMetalView
         init(_ view:MyMetalView) {
             self.view = view
+        }
+        
+        func makeLayer() -> CALayer {
+            let layer = CALayer()
+            layer.backgroundColor = NSColor.yellow.cgColor
+            return layer
         }
     }
 }
