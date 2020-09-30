@@ -14,6 +14,7 @@ class MyRenderer: NSObject {
     let commandQueue:MTLCommandQueue?
     let pixelFormat:MTLPixelFormat
     var circleVertices = [simd_float2]()
+    var vertexBuffer:MTLBuffer!
     
     init(device:MTLDevice, pixelFormat:MTLPixelFormat) {
         self.device = device
@@ -21,6 +22,7 @@ class MyRenderer: NSObject {
         self.commandQueue = device.makeCommandQueue()
         super.init()
         createVertexPoints()
+        vertexBuffer = device.makeBuffer(bytes: circleVertices, length: circleVertices.count * MemoryLayout<simd_float2>.stride, options: [])!
     }
     
     private func createVertexPoints() {
@@ -77,6 +79,22 @@ extension MyRenderer: MTKViewDelegate {
             print("no renderEncoder")
             return
         }
+        
+        let pipelineDescriptor = MTLRenderPipelineDescriptor()
+
+        //give the names of the function to the pipelineDescriptor
+        pipelineDescriptor.vertexFunction = vertexShader
+        pipelineDescriptor.fragmentFunction = fragmentShader
+
+        //set the pixel format to match the MetalView's pixel format
+        pipelineDescriptor.colorAttachments[0].pixelFormat = pixelFormat
+
+        //make the pipelinestate using the gpu interface and the pipelineDescriptor
+        let metalRenderPipelineState = try! device.makeRenderPipelineState(descriptor: pipelineDescriptor)
+        renderEncoder.setRenderPipelineState(metalRenderPipelineState)
+        renderEncoder.setVertexBuffer(vertexBuffer, offset: 0, index: 0)
+        renderEncoder.drawPrimitives(type: .triangle, vertexStart: 0, vertexCount: 1081)
+
         renderEncoder.endEncoding()
         commandBuffer.present(drawable)
         commandBuffer.commit()
