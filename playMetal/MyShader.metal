@@ -19,7 +19,7 @@ vertex VertexOut vertexShader(const constant vector_float2 *vertexArray [[buffer
     VertexOut output;
     
     output.position = vector_float4(currentVertex.x, currentVertex.y, 0, 1); //populate the output position with the x and y values of our input vertex data
-    output.color = vector_float4(1,1,1,1); //set the color
+    output.color = vector_float4((currentVertex.x+1)/2,(currentVertex.y+1)/2,1,1); //set the color
     
     return output;
 }
