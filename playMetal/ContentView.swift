@@ -10,7 +10,7 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         VStack {
-            MyMetalView()
+            MyMetalView(shader:MyCircle())
             Text("Hello, World!")
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
         }

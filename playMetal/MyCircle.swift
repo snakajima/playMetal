@@ -6,7 +6,12 @@
 //
 
 import Foundation
+import Metal
 
-struct MyCircle {
+class MyCircle : MyRendererDelegate {
+    var metalRenderPipelineState: MTLRenderPipelineState? = nil
     
+    func prepare(device:MTLDevice, pixelFormat:MTLPixelFormat) {
+        self.metalRenderPipelineState = MyRenderer.createPipelineState(device: device, pixelFormat: pixelFormat, vertex:"vertexShader", fragment:"fragmentShader")
+    }
 }

@@ -9,8 +9,10 @@ import SwiftUI
 import MetalKit
 
 struct MyMetalView: NSViewRepresentable {
+    let shader:MyRendererDelegate
+    
     func makeCoordinator() -> Coordinator {
-        return Coordinator(self)
+        return Coordinator(self, shader: shader)
     }
     
     public func makeNSView(context: Context) -> some NSView {
@@ -25,9 +27,9 @@ struct MyMetalView: NSViewRepresentable {
         let device = MTLCreateSystemDefaultDevice()! // LAZY
         let renderer:MyRenderer
         let view: MyMetalView
-        init(_ view:MyMetalView) {
+        init(_ view:MyMetalView, shader:MyRendererDelegate) {
             self.view = view
-            self.renderer = MyRenderer(device: device, pixelFormat: .bgra8Unorm)
+            self.renderer = MyRenderer(device: device, pixelFormat: .bgra8Unorm, delegate:shader)
         }
         
         func makeNSView() -> some NSView {
@@ -49,12 +51,12 @@ struct MyMetalView_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
             HStack {
-                MyMetalView()
-                MyMetalView()
+                MyMetalView(shader:MyCircle())
+                MyMetalView(shader:MyCircle())
             }
             HStack {
-                MyMetalView()
-                MyMetalView()
+                MyMetalView(shader:MyCircle())
+                MyMetalView(shader:MyCircle())
             }
         }
     }

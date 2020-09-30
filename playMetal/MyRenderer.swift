@@ -9,16 +9,24 @@ import MetalKit
 import simd
 import SwiftUI // only for preview
 
+protocol MyRendererDelegate {
+    var metalRenderPipelineState:MTLRenderPipelineState? { get }
+    func prepare(device:MTLDevice, pixelFormat:MTLPixelFormat)
+}
+
 class MyRenderer: NSObject {
     let device:MTLDevice
     let pixelFormat:MTLPixelFormat
     let commandQueue:MTLCommandQueue?
     let vertexBuffer:MTLBuffer
     let metalRenderPipelineState:MTLRenderPipelineState?
+    let delegate:MyRendererDelegate
     
-    init(device:MTLDevice, pixelFormat:MTLPixelFormat) {
+    init(device:MTLDevice, pixelFormat:MTLPixelFormat, delegate:MyRendererDelegate) {
         self.device = device
         self.pixelFormat = pixelFormat
+        self.delegate = delegate
+        delegate.prepare(device: device, pixelFormat: pixelFormat)
         self.commandQueue = device.makeCommandQueue()
         self.vertexBuffer = MyRenderer.createVertexBuffer(device:device)
         self.metalRenderPipelineState = MyRenderer.createPipelineState(device: device, pixelFormat: pixelFormat, vertex:"vertexShader", fragment:"fragmentShader")
@@ -39,7 +47,7 @@ class MyRenderer: NSObject {
         return device.makeBuffer(bytes: vertices, length: vertices.count * MemoryLayout<simd_float2>.stride, options: [])!
     }
     
-    static private func createPipelineState(device:MTLDevice, pixelFormat:MTLPixelFormat,
+    static func createPipelineState(device:MTLDevice, pixelFormat:MTLPixelFormat,
                                             vertex:String, fragment:String) -> MTLRenderPipelineState? {
         guard let shaderLib = device.makeDefaultLibrary(),
               let vertexShader = shaderLib.makeFunction(name: vertex),
@@ -63,7 +71,7 @@ extension MyRenderer: MTKViewDelegate {
     func draw(in view: MTKView) {
         guard let commandQueue = self.commandQueue,
               let commandBuffer = commandQueue.makeCommandBuffer(),
-              let metalRenderPipelineState = self.metalRenderPipelineState else {
+              let metalRenderPipelineState = delegate.metalRenderPipelineState else {
             print("no commandQueu, commandBuffer, metalRenderPipelineState")
             return
         }
@@ -85,6 +93,6 @@ extension MyRenderer: MTKViewDelegate {
 
 struct MyRenderer_Previews: PreviewProvider {
     static var previews: some View {
-        MyMetalView()
+        MyMetalView(shader:MyCircle())
     }
 }
