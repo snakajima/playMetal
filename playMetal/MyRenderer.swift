@@ -6,16 +6,33 @@
 //
 
 import MetalKit
+import simd
 import SwiftUI // only for preview
 
 class MyRenderer: NSObject {
     let device:MTLDevice
     let commandQueue:MTLCommandQueue?
     let pixelFormat:MTLPixelFormat
+    var circleVertices = [simd_float2]()
+    
     init(device:MTLDevice, pixelFormat:MTLPixelFormat) {
         self.device = device
         self.pixelFormat = pixelFormat
         self.commandQueue = device.makeCommandQueue()
+        super.init()
+        createVertexPoints()
+    }
+    
+    private func createVertexPoints() {
+        func rads(forDegree d: Float)->Float32{
+            return (Float.pi*d)/180
+        }
+
+        for i in 0...720 {
+            let position : simd_float2 = [cos(rads(forDegree: Float(Float(i)/2.0))),sin(rads(forDegree: Float(Float(i)/2.0)))]
+            circleVertices.append(position)
+        }
+        
     }
 }
 
