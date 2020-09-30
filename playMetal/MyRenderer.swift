@@ -9,10 +9,12 @@ import MetalKit
 
 class MyRenderer: NSObject {
     let device:MTLDevice
+    let commandQueue:MTLCommandQueue?
     let pixelFormat:MTLPixelFormat
     init(device:MTLDevice, pixelFormat:MTLPixelFormat) {
         self.device = device
         self.pixelFormat = pixelFormat
+        self.commandQueue = device.makeCommandQueue()
     }
 }
 
@@ -22,6 +24,18 @@ extension MyRenderer: MTKViewDelegate {
     }
     
     func draw(in view: MTKView) {
-        print("draw")
+        guard let commandQueue = self.commandQueue,
+              let commandBuffer = commandQueue.makeCommandBuffer() else {
+            print("no commandQueu or commandBuffer")
+            return
+        }
+
+        guard let drawable = view.currentDrawable else {
+            print("no drawable")
+            return
+        }
+        
+        commandBuffer.present(drawable)
+        commandBuffer.commit()
     }
 }
