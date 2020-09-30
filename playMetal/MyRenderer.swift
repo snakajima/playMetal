@@ -6,6 +6,7 @@
 //
 
 import MetalKit
+import SwiftUI // only for preview
 
 class MyRenderer: NSObject {
     let device:MTLDevice
@@ -49,8 +50,24 @@ extension MyRenderer: MTKViewDelegate {
             print("no fragmentShader")
             return
         }
-        
+                
+        guard let renderDescriptor = view.currentRenderPassDescriptor else {
+            print("no renderDescriptor")
+            return
+        }
+        renderDescriptor.colorAttachments[0].clearColor = MTLClearColorMake(0, 1, 0, 1)
+        guard let renderEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: renderDescriptor) else {
+            print("no renderEncoder")
+            return
+        }
+        renderEncoder.endEncoding()
         commandBuffer.present(drawable)
         commandBuffer.commit()
+    }
+}
+
+struct MyRenderer_Previews: PreviewProvider {
+    static var previews: some View {
+        MyMetalView()
     }
 }
