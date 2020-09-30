@@ -35,12 +35,6 @@ struct MyMetalView: NSViewRepresentable {
             metalView.device = device
             metalView.delegate = renderer
             metalView.translatesAutoresizingMaskIntoConstraints = false
-            /*
-            metalView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-            metalView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-            metalView.topAnchor.constraint(equalTo: topAnchor).isActive = true
-            metalView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-            */
             metalView.clearColor = MTLClearColorMake(1, 1, 1, 1)
             metalView.colorPixelFormat = renderer.pixelFormat
             metalView.autoResizeDrawable = true
