@@ -29,7 +29,6 @@
 		746E65DA252406410041AEE0 /* MyMetalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMetalView.swift; sourceTree = "<group>"; };
 		746E65DD252408FF0041AEE0 /* MyRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRenderer.swift; sourceTree = "<group>"; };
 		746E65E0252438EB0041AEE0 /* MyShader.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = MyShader.metal; sourceTree = "<group>"; };
-		746E65E325243A220041AEE0 /* MyShaderTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyShaderTypes.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,7 +66,6 @@
 				746E65DA252406410041AEE0 /* MyMetalView.swift */,
 				746E65DD252408FF0041AEE0 /* MyRenderer.swift */,
 				746E65E0252438EB0041AEE0 /* MyShader.metal */,
-				746E65E325243A220041AEE0 /* MyShaderTypes.h */,
 				746E65CA252405C90041AEE0 /* Assets.xcassets */,
 				746E65CF252405C90041AEE0 /* Main.storyboard */,
 				746E65D2252405C90041AEE0 /* Info.plist */,
