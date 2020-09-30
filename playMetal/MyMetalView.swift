@@ -47,6 +47,15 @@ struct MyMetalView: NSViewRepresentable {
 
 struct MyMetalView_Previews: PreviewProvider {
     static var previews: some View {
-        MyMetalView()
+        VStack {
+            HStack {
+                MyMetalView()
+                MyMetalView()
+            }
+            HStack {
+                MyMetalView()
+                MyMetalView()
+            }
+        }
     }
 }
