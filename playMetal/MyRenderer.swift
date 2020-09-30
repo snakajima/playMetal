@@ -15,6 +15,7 @@ class MyRenderer: NSObject {
     let pixelFormat:MTLPixelFormat
     var circleVertices = [simd_float2]()
     var vertexBuffer:MTLBuffer!
+    var metalRenderPipelineState:MTLRenderPipelineState!
     
     init(device:MTLDevice, pixelFormat:MTLPixelFormat) {
         self.device = device
@@ -23,6 +24,7 @@ class MyRenderer: NSObject {
         super.init()
         createVertexPoints()
         vertexBuffer = device.makeBuffer(bytes: circleVertices, length: circleVertices.count * MemoryLayout<simd_float2>.stride, options: [])!
+        createPipelineState()
     }
     
     private func createVertexPoints() {
@@ -34,8 +36,30 @@ class MyRenderer: NSObject {
             let position : simd_float2 = [cos(rads(forDegree: Float(Float(i)/2.0))),sin(rads(forDegree: Float(Float(i)/2.0)))]
             circleVertices.append(position)
         }
-        
     }
+    
+    fileprivate func createPipelineState() {
+        guard let shaderLib = device.makeDefaultLibrary() else {
+            print("no shderLib")
+            return
+        }
+        
+        guard let vertexShader = shaderLib.makeFunction(name: "vertexShader") else {
+            print("no vertexShader")
+            return
+        }
+        
+        guard let fragmentShader = shaderLib.makeFunction(name: "fragmentShader") else {
+            print("no fragmentShader")
+            return
+        }
+
+        let pipelineDescriptor = MTLRenderPipelineDescriptor()
+        pipelineDescriptor.vertexFunction = vertexShader
+        pipelineDescriptor.fragmentFunction = fragmentShader
+        pipelineDescriptor.colorAttachments[0].pixelFormat = pixelFormat
+        metalRenderPipelineState = try! device.makeRenderPipelineState(descriptor: pipelineDescriptor)
+      }
 }
 
 extension MyRenderer: MTKViewDelegate {
@@ -55,20 +79,6 @@ extension MyRenderer: MTKViewDelegate {
             return
         }
         
-        guard let shaderLib = device.makeDefaultLibrary() else {
-            print("no shderLib")
-            return
-        }
-        
-        guard let vertexShader = shaderLib.makeFunction(name: "vertexShader") else {
-            print("no vertexShader")
-            return
-        }
-        
-        guard let fragmentShader = shaderLib.makeFunction(name: "fragmentShader") else {
-            print("no fragmentShader")
-            return
-        }
                 
         guard let renderDescriptor = view.currentRenderPassDescriptor else {
             print("no renderDescriptor")
@@ -79,7 +89,7 @@ extension MyRenderer: MTKViewDelegate {
             print("no renderEncoder")
             return
         }
-        
+/*
         let pipelineDescriptor = MTLRenderPipelineDescriptor()
 
         //give the names of the function to the pipelineDescriptor
@@ -88,9 +98,9 @@ extension MyRenderer: MTKViewDelegate {
 
         //set the pixel format to match the MetalView's pixel format
         pipelineDescriptor.colorAttachments[0].pixelFormat = pixelFormat
-
         //make the pipelinestate using the gpu interface and the pipelineDescriptor
         let metalRenderPipelineState = try! device.makeRenderPipelineState(descriptor: pipelineDescriptor)
+         */
         renderEncoder.setRenderPipelineState(metalRenderPipelineState)
         renderEncoder.setVertexBuffer(vertexBuffer, offset: 0, index: 0)
         renderEncoder.drawPrimitives(type: .triangle, vertexStart: 0, vertexCount: 1081)
