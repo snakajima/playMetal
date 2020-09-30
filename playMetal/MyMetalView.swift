@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import MetalKit
 
 struct MyMetalView: NSViewRepresentable {
     func makeCoordinator() -> Coordinator {
@@ -13,9 +14,7 @@ struct MyMetalView: NSViewRepresentable {
     }
     
     public func makeNSView(context: Context) -> some NSView {
-        let nsView = NSView()
-        nsView.layer = context.coordinator.makeLayer()
-        return nsView
+        return context.coordinator.makeNSView()
     }
     
     public func updateNSView(_ nsView: NSViewType, context: Context) {
@@ -31,16 +30,16 @@ struct MyMetalView: NSViewRepresentable {
             self.renderer = MyRenderer(device: device, pixelFormat: .bgra8Unorm)
         }
         
-        func makeLayer() -> CALayer {
-            let layer = CAMetalLayer()
-            layer.pixelFormat = renderer.pixelFormat
-            layer.delegate = self
-            layer.backgroundColor = NSColor.yellow.cgColor
-            return layer
-        }
-        
-        func display(_ layer: CALayer) {
-            print("display")
+        func makeNSView() -> some NSView {
+            let metalView = MTKView()
+            metalView.device = device
+            metalView.delegate = renderer
+            metalView.clearColor = MTLClearColorMake(1, 1, 1, 1)
+            metalView.colorPixelFormat = renderer.pixelFormat
+            metalView.translatesAutoresizingMaskIntoConstraints = false
+            metalView.autoResizeDrawable = true
+            metalView.framebufferOnly = false
+            return metalView
         }
     }
 }
