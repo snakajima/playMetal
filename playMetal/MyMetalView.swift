@@ -31,7 +31,7 @@ struct MyMetalView: NSViewRepresentable {
         }
         
         func makeLayer() -> CALayer {
-            let layer = CALayer()
+            let layer = CAMetalLayer()
             layer.backgroundColor = NSColor.yellow.cgColor
             return layer
         }
