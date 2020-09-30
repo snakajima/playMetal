@@ -21,7 +21,7 @@ class MyRenderer: NSObject {
         self.pixelFormat = pixelFormat
         self.commandQueue = device.makeCommandQueue()
         self.vertexBuffer = MyRenderer.createVertexBuffer(device:device)
-        self.metalRenderPipelineState = MyRenderer.createPipelineState(device: device, pixelFormat: pixelFormat)
+        self.metalRenderPipelineState = MyRenderer.createPipelineState(device: device, pixelFormat: pixelFormat, vertex:"vertexShader", fragment:"fragmentShader")
     }
     
     static private func createVertexBuffer(device:MTLDevice) ->MTLBuffer {
@@ -39,10 +39,11 @@ class MyRenderer: NSObject {
         return device.makeBuffer(bytes: vertices, length: vertices.count * MemoryLayout<simd_float2>.stride, options: [])!
     }
     
-    static private func createPipelineState(device:MTLDevice, pixelFormat:MTLPixelFormat) -> MTLRenderPipelineState? {
+    static private func createPipelineState(device:MTLDevice, pixelFormat:MTLPixelFormat,
+                                            vertex:String, fragment:String) -> MTLRenderPipelineState? {
         guard let shaderLib = device.makeDefaultLibrary(),
-              let vertexShader = shaderLib.makeFunction(name: "vertexShader"),
-              let fragmentShader = shaderLib.makeFunction(name: "fragmentShader")else {
+              let vertexShader = shaderLib.makeFunction(name: vertex),
+              let fragmentShader = shaderLib.makeFunction(name: fragment)else {
             print("no shader")
             return nil
         }
