@@ -11,6 +11,8 @@ import SwiftUI // only for preview
 
 protocol MyRendererDelegate {
     var metalRenderPipelineState:MTLRenderPipelineState? { get }
+    var vertexBuffer:MTLBuffer? { get }
+
     func prepare(device:MTLDevice, pixelFormat:MTLPixelFormat)
 }
 
@@ -18,7 +20,6 @@ class MyRenderer: NSObject {
     let device:MTLDevice
     let pixelFormat:MTLPixelFormat
     let commandQueue:MTLCommandQueue?
-    let vertexBuffer:MTLBuffer
     let delegate:MyRendererDelegate
     
     init(device:MTLDevice, pixelFormat:MTLPixelFormat, delegate:MyRendererDelegate) {
@@ -27,22 +28,6 @@ class MyRenderer: NSObject {
         self.delegate = delegate
         delegate.prepare(device: device, pixelFormat: pixelFormat)
         self.commandQueue = device.makeCommandQueue()
-        self.vertexBuffer = MyRenderer.createVertexBuffer(device:device)
-    }
-    
-    static private func createVertexBuffer(device:MTLDevice) ->MTLBuffer {
-        var vertices = Array(0..<360).map { (i) -> [simd_float2] in
-            let rad0 = Float(i * 2) / 2.0 / 180 * .pi
-            let rad1 = Float(i * 2 + 1) / 2.0 / 180 * .pi
-            return [
-                [cos(rad0), sin(rad0)],
-                [cos(rad1), sin(rad1)],
-                [0, 0]
-            ]
-        }.flatMap { $0 }
-        vertices.append(vertices[0])
-        
-        return device.makeBuffer(bytes: vertices, length: vertices.count * MemoryLayout<simd_float2>.stride, options: [])!
     }
     
     static func createPipelineState(device:MTLDevice, pixelFormat:MTLPixelFormat,
@@ -75,7 +60,8 @@ extension MyRenderer: MTKViewDelegate {
         }
         
         if let renderDescriptor = view.currentRenderPassDescriptor,
-           let renderEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: renderDescriptor) {
+           let renderEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: renderDescriptor),
+           let vertexBuffer = delegate.vertexBuffer {
             renderEncoder.setRenderPipelineState(metalRenderPipelineState)
             renderEncoder.setVertexBuffer(vertexBuffer, offset: 0, index: 0)
             renderEncoder.drawPrimitives(type: .triangleStrip, vertexStart: 0, vertexCount: 1081)
