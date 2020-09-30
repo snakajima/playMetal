@@ -12,6 +12,7 @@ import SwiftUI // only for preview
 protocol MyRendererDelegate {
     var metalRenderPipelineState:MTLRenderPipelineState? { get }
     var vertexBuffer:MTLBuffer? { get }
+    var vertexCount:Int { get }
 
     func prepare(device:MTLDevice, pixelFormat:MTLPixelFormat)
 }
@@ -64,7 +65,7 @@ extension MyRenderer: MTKViewDelegate {
            let vertexBuffer = delegate.vertexBuffer {
             renderEncoder.setRenderPipelineState(metalRenderPipelineState)
             renderEncoder.setVertexBuffer(vertexBuffer, offset: 0, index: 0)
-            renderEncoder.drawPrimitives(type: .triangleStrip, vertexStart: 0, vertexCount: 1081)
+            renderEncoder.drawPrimitives(type: .triangleStrip, vertexStart: 0, vertexCount: delegate.vertexCount)
             renderEncoder.endEncoding()
             if let drawable = view.currentDrawable {
                 commandBuffer.present(drawable)

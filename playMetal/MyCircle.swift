@@ -12,7 +12,8 @@ import simd
 class MyCircle : MyRendererDelegate {
     var metalRenderPipelineState: MTLRenderPipelineState? = nil
     var vertexBuffer:MTLBuffer? = nil
-
+    var vertexCount = 1081
+    
     func prepare(device:MTLDevice, pixelFormat:MTLPixelFormat) {
         self.metalRenderPipelineState = MyRenderer.createPipelineState(device: device, pixelFormat: pixelFormat, vertex:"vertexShader", fragment:"fragmentShader")
         var vertices = Array(0..<360).map { (i) -> [simd_float2] in
