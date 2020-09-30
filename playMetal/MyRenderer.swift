@@ -26,13 +26,11 @@ class MyRenderer: NSObject {
     
     static private func createVertexBuffer(device:MTLDevice) ->MTLBuffer {
         var circleVertices = [simd_float2]()
-        func rads(forDegree d: Float)->Float32{
-            return (Float.pi*d)/180
-        }
 
         let origin = simd_float2(0, 0)
         for i in 0...720 {
-            let position : simd_float2 = [cos(rads(forDegree: Float(Float(i)/2.0))),sin(rads(forDegree: Float(Float(i)/2.0)))]
+            let rad = Float(i) / 2.0 / 180 * .pi
+            let position : simd_float2 = [cos(rad), sin(rad)]
             circleVertices.append(position)
             if (i+1)%2 == 0 {
                 circleVertices.append(origin)
@@ -42,18 +40,10 @@ class MyRenderer: NSObject {
     }
     
     static private func createPipelineState(device:MTLDevice, pixelFormat:MTLPixelFormat) -> MTLRenderPipelineState? {
-        guard let shaderLib = device.makeDefaultLibrary() else {
-            print("no shderLib")
-            return nil
-        }
-        
-        guard let vertexShader = shaderLib.makeFunction(name: "vertexShader") else {
-            print("no vertexShader")
-            return nil
-        }
-        
-        guard let fragmentShader = shaderLib.makeFunction(name: "fragmentShader") else {
-            print("no fragmentShader")
+        guard let shaderLib = device.makeDefaultLibrary(),
+              let vertexShader = shaderLib.makeFunction(name: "vertexShader"),
+              let fragmentShader = shaderLib.makeFunction(name: "fragmentShader")else {
+            print("no shader")
             return nil
         }
 
