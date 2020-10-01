@@ -12,7 +12,7 @@ class MyTriangle: MyRendererDelegate {
     var device:MTLDevice!
     var metalRenderPipelineState: MTLRenderPipelineState? = nil
     var vertexBuffer:MTLBuffer? {
-        device.makeBuffer(bytes: vertices, length: vertices.count * MemoryLayout<simd_float2>.stride, options: [])!
+        device.makeBuffer(bytes: vertices, length: vertexCount * MemoryLayout<simd_float2>.stride, options: [])!
     }
     var vertices:[simd_float2] {
         let time = Float(CACurrentMediaTime() * .pi)
@@ -25,9 +25,10 @@ class MyTriangle: MyRendererDelegate {
             simd_float2(sinf(time),cosf(time))
         ]
         vertices.append(vertices[0])
+        vertexCount = vertices.count
         return vertices
     }
-    var vertexCount:Int { vertices.count }
+    var vertexCount = 0
     
     func prepare(device:MTLDevice, pixelFormat:MTLPixelFormat) {
         self.metalRenderPipelineState = MyRenderer.createPipelineState(device: device, pixelFormat: pixelFormat, vertex:"vertexShader", fragment:"fragmentShader")

@@ -54,7 +54,7 @@ struct MyMetalView_Previews: PreviewProvider {
                 MyMetalView(shader:MyCircle())
             }
             HStack {
-                MyMetalView(shader:MyCircle())
+                MyMetalView(shader:MyTriangle())
                 MyMetalView(shader:MyCircle())
             }
         }
