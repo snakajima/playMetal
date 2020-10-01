@@ -12,7 +12,8 @@ class MyTriangle: MyRendererDelegate {
     var device:MTLDevice!
     var metalRenderPipelineState: MTLRenderPipelineState? = nil
     var vertexBuffer:MTLBuffer? {
-        device.makeBuffer(bytes: vertices, length: vertexCount * MemoryLayout<simd_float2>.stride, options: [])!
+        let vertices = self.vertices // updates vertexCount
+        return device.makeBuffer(bytes: vertices, length: vertexCount * MemoryLayout<simd_float2>.stride, options: [])!
     }
     var vertices:[simd_float2] {
         let time = Float(CACurrentMediaTime() * .pi)
