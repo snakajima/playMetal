@@ -19,6 +19,7 @@ class MyRenderer: NSObject {
     let pixelFormat:MTLPixelFormat
     let commandQueue:MTLCommandQueue?
     let delegate:MyRendererDelegate
+    var busy = false
     
     init(device:MTLDevice, pixelFormat:MTLPixelFormat, delegate:MyRendererDelegate) {
         self.device = device
@@ -56,6 +57,15 @@ extension MyRenderer: MTKViewDelegate {
             print("no commandQueu, commandBuffer, metalRenderPipelineState")
             return
         }
+        let x = CACurrentMediaTime()
+        let tick = Int(floor(x * 60)) % 60
+        if busy {
+            print("skip", tick)
+            return
+        }
+        
+        print("draw", tick)
+        busy = true
         
         if let vertex = delegate.getVertex(device:device),
            let renderDescriptor = view.currentRenderPassDescriptor,
@@ -68,13 +78,16 @@ extension MyRenderer: MTKViewDelegate {
                 commandBuffer.present(drawable)
             }
         }
-
+        commandBuffer.addCompletedHandler { (_) in
+            print("complete", tick)
+            self.busy = false
+        }
         commandBuffer.commit()
     }
 }
 
 struct MyRenderer_Previews: PreviewProvider {
     static var previews: some View {
-        MyMetalView(shader:MyCircle())
+        MyMetalView(shader:MyTriangle())
     }
 }

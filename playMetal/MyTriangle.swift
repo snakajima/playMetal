@@ -20,6 +20,7 @@ class MyTriangle: MyRendererDelegate {
             simd_float2(cosf(time),-sinf(time)),
             simd_float2(sinf(time),cosf(time))
         ]
+            
         vertices.append(vertices[0])
         if let buffer = device.makeBuffer(bytes: vertices, length: vertices.count * MemoryLayout<simd_float2>.stride, options: []) {
             return (buffer, vertices.count)
