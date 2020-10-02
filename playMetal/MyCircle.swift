@@ -9,13 +9,15 @@ import simd
 import SwiftUI // preview
 
 class MyCircle : MyRendererDelegate {
+    
     var metalRenderPipelineState: MTLRenderPipelineState? = nil
-    var vertexBuffer:MTLBuffer? = nil
-    var vertexCount = 0
     
     func prepare(device:MTLDevice, pixelFormat:MTLPixelFormat) {
         self.metalRenderPipelineState = MyRenderer.createPipelineState(device: device, pixelFormat: pixelFormat, vertex:"vertexShader", fragment:"fragmentShader")
 
+    }
+
+    func getVertex(device:MTLDevice) -> (buffer: MTLBuffer, count: Int)? {
         var vertices = Array(0..<360).map { (i) -> [simd_float2] in
             let rad0 = Float(i * 2) / 2.0 / 180 * .pi
             let rad1 = Float(i * 2 + 1) / 2.0 / 180 * .pi
@@ -25,8 +27,11 @@ class MyCircle : MyRendererDelegate {
         }.flatMap { $0 }
         vertices.append(vertices[0])
 
-        self.vertexCount = vertices.count
-        self.vertexBuffer = device.makeBuffer(bytes: vertices, length: vertices.count * MemoryLayout<simd_float2>.stride, options: [])!
+        if let buffer = device.makeBuffer(bytes: vertices, length: vertices.count * MemoryLayout<simd_float2>.stride, options: []) {
+            return (buffer, vertices.count)
+        } else {
+            return nil
+        }
     }
 }
 
