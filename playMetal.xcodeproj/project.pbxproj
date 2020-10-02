@@ -17,6 +17,15 @@
 		746E65E1252438EB0041AEE0 /* MyShader.metal in Sources */ = {isa = PBXBuildFile; fileRef = 746E65E0252438EB0041AEE0 /* MyShader.metal */; };
 		746E65EB2525371A0041AEE0 /* MyCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746E65EA2525371A0041AEE0 /* MyCircle.swift */; };
 		746E65EE25254B8E0041AEE0 /* MyTriangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746E65ED25254B8E0041AEE0 /* MyTriangle.swift */; };
+		746E65F7252793AC0041AEE0 /* playMetaliOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746E65F6252793AC0041AEE0 /* playMetaliOSApp.swift */; };
+		746E65F9252793AD0041AEE0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746E65F8252793AD0041AEE0 /* ContentView.swift */; };
+		746E65FB252793AF0041AEE0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 746E65FA252793AF0041AEE0 /* Assets.xcassets */; };
+		746E65FE252793AF0041AEE0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 746E65FD252793AF0041AEE0 /* Preview Assets.xcassets */; };
+		746E66062527941A0041AEE0 /* MyCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746E65EA2525371A0041AEE0 /* MyCircle.swift */; };
+		746E66072527941A0041AEE0 /* MyTriangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746E65ED25254B8E0041AEE0 /* MyTriangle.swift */; };
+		746E66082527941A0041AEE0 /* MyRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746E65DD252408FF0041AEE0 /* MyRenderer.swift */; };
+		746E66092527941A0041AEE0 /* MyShader.metal in Sources */ = {isa = PBXBuildFile; fileRef = 746E65E0252438EB0041AEE0 /* MyShader.metal */; };
+		746E660D2527944B0041AEE0 /* MyMetalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746E660C2527944B0041AEE0 /* MyMetalView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,10 +42,24 @@
 		746E65E0252438EB0041AEE0 /* MyShader.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = MyShader.metal; sourceTree = "<group>"; };
 		746E65EA2525371A0041AEE0 /* MyCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCircle.swift; sourceTree = "<group>"; };
 		746E65ED25254B8E0041AEE0 /* MyTriangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTriangle.swift; sourceTree = "<group>"; };
+		746E65F4252793AC0041AEE0 /* playMetaliOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = playMetaliOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		746E65F6252793AC0041AEE0 /* playMetaliOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = playMetaliOSApp.swift; sourceTree = "<group>"; };
+		746E65F8252793AD0041AEE0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		746E65FA252793AF0041AEE0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		746E65FD252793AF0041AEE0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		746E65FF252793AF0041AEE0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		746E660C2527944B0041AEE0 /* MyMetalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMetalView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		746E65C0252405C70041AEE0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		746E65F1252793AC0041AEE0 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -49,7 +72,9 @@
 		746E65BA252405C70041AEE0 = {
 			isa = PBXGroup;
 			children = (
+				746E6605252793EB0041AEE0 /* common */,
 				746E65C5252405C70041AEE0 /* playMetal */,
+				746E65F5252793AC0041AEE0 /* playMetaliOS */,
 				746E65C4252405C70041AEE0 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -58,6 +83,7 @@
 			isa = PBXGroup;
 			children = (
 				746E65C3252405C70041AEE0 /* playMetal.app */,
+				746E65F4252793AC0041AEE0 /* playMetaliOS.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -68,10 +94,6 @@
 				746E65C6252405C70041AEE0 /* AppDelegate.swift */,
 				746E65C8252405C70041AEE0 /* ContentView.swift */,
 				746E65DA252406410041AEE0 /* MyMetalView.swift */,
-				746E65DD252408FF0041AEE0 /* MyRenderer.swift */,
-				746E65EA2525371A0041AEE0 /* MyCircle.swift */,
-				746E65ED25254B8E0041AEE0 /* MyTriangle.swift */,
-				746E65E0252438EB0041AEE0 /* MyShader.metal */,
 				746E65CA252405C90041AEE0 /* Assets.xcassets */,
 				746E65CF252405C90041AEE0 /* Main.storyboard */,
 				746E65D2252405C90041AEE0 /* Info.plist */,
@@ -87,6 +109,38 @@
 				746E65CD252405C90041AEE0 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		746E65F5252793AC0041AEE0 /* playMetaliOS */ = {
+			isa = PBXGroup;
+			children = (
+				746E65F6252793AC0041AEE0 /* playMetaliOSApp.swift */,
+				746E65F8252793AD0041AEE0 /* ContentView.swift */,
+				746E65FA252793AF0041AEE0 /* Assets.xcassets */,
+				746E65FF252793AF0041AEE0 /* Info.plist */,
+				746E65FC252793AF0041AEE0 /* Preview Content */,
+				746E660C2527944B0041AEE0 /* MyMetalView.swift */,
+			);
+			path = playMetaliOS;
+			sourceTree = "<group>";
+		};
+		746E65FC252793AF0041AEE0 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				746E65FD252793AF0041AEE0 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		746E6605252793EB0041AEE0 /* common */ = {
+			isa = PBXGroup;
+			children = (
+				746E65DD252408FF0041AEE0 /* MyRenderer.swift */,
+				746E65EA2525371A0041AEE0 /* MyCircle.swift */,
+				746E65ED25254B8E0041AEE0 /* MyTriangle.swift */,
+				746E65E0252438EB0041AEE0 /* MyShader.metal */,
+			);
+			path = common;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -109,6 +163,23 @@
 			productReference = 746E65C3252405C70041AEE0 /* playMetal.app */;
 			productType = "com.apple.product-type.application";
 		};
+		746E65F3252793AC0041AEE0 /* playMetaliOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 746E6602252793AF0041AEE0 /* Build configuration list for PBXNativeTarget "playMetaliOS" */;
+			buildPhases = (
+				746E65F0252793AC0041AEE0 /* Sources */,
+				746E65F1252793AC0041AEE0 /* Frameworks */,
+				746E65F2252793AC0041AEE0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = playMetaliOS;
+			productName = playMetaliOS;
+			productReference = 746E65F4252793AC0041AEE0 /* playMetaliOS.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -119,6 +190,9 @@
 				LastUpgradeCheck = 1200;
 				TargetAttributes = {
 					746E65C2252405C70041AEE0 = {
+						CreatedOnToolsVersion = 12.0;
+					};
+					746E65F3252793AC0041AEE0 = {
 						CreatedOnToolsVersion = 12.0;
 					};
 				};
@@ -137,6 +211,7 @@
 			projectRoot = "";
 			targets = (
 				746E65C2252405C70041AEE0 /* playMetal */,
+				746E65F3252793AC0041AEE0 /* playMetaliOS */,
 			);
 		};
 /* End PBXProject section */
@@ -149,6 +224,15 @@
 				746E65D1252405C90041AEE0 /* Main.storyboard in Resources */,
 				746E65CE252405C90041AEE0 /* Preview Assets.xcassets in Resources */,
 				746E65CB252405C90041AEE0 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		746E65F2252793AC0041AEE0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				746E65FE252793AF0041AEE0 /* Preview Assets.xcassets in Resources */,
+				746E65FB252793AF0041AEE0 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -166,6 +250,20 @@
 				746E65C9252405C70041AEE0 /* ContentView.swift in Sources */,
 				746E65C7252405C70041AEE0 /* AppDelegate.swift in Sources */,
 				746E65DB252406410041AEE0 /* MyMetalView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		746E65F0252793AC0041AEE0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				746E66092527941A0041AEE0 /* MyShader.metal in Sources */,
+				746E65F9252793AD0041AEE0 /* ContentView.swift in Sources */,
+				746E66062527941A0041AEE0 /* MyCircle.swift in Sources */,
+				746E65F7252793AC0041AEE0 /* playMetaliOSApp.swift in Sources */,
+				746E66082527941A0041AEE0 /* MyRenderer.swift in Sources */,
+				746E660D2527944B0041AEE0 /* MyMetalView.swift in Sources */,
+				746E66072527941A0041AEE0 /* MyTriangle.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -346,6 +444,53 @@
 			};
 			name = Release;
 		};
+		746E6600252793AF0041AEE0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"playMetaliOS/Preview Content\"";
+				DEVELOPMENT_TEAM = H34BY2CCCD;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = playMetaliOS/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.singularitysociety.playMetaliOS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		746E6601252793AF0041AEE0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"playMetaliOS/Preview Content\"";
+				DEVELOPMENT_TEAM = H34BY2CCCD;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = playMetaliOS/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.singularitysociety.playMetaliOS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -363,6 +508,15 @@
 			buildConfigurations = (
 				746E65D7252405C90041AEE0 /* Debug */,
 				746E65D8252405C90041AEE0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		746E6602252793AF0041AEE0 /* Build configuration list for PBXNativeTarget "playMetaliOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				746E6600252793AF0041AEE0 /* Debug */,
+				746E6601252793AF0041AEE0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
