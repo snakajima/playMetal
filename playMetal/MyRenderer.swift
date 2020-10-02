@@ -57,9 +57,9 @@ extension MyRenderer: MTKViewDelegate {
             return
         }
         
-        if let renderDescriptor = view.currentRenderPassDescriptor,
-           let renderEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: renderDescriptor),
-           let vertex = delegate.getVertex(device:device) {
+        if let vertex = delegate.getVertex(device:device),
+           let renderDescriptor = view.currentRenderPassDescriptor,
+           let renderEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: renderDescriptor) {
             renderEncoder.setRenderPipelineState(metalRenderPipelineState)
             renderEncoder.setVertexBuffer(vertex.buffer, offset: 0, index: 0)
             renderEncoder.drawPrimitives(type: .triangleStrip, vertexStart: 0, vertexCount: vertex.count)
